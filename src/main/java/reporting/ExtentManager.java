@@ -11,12 +11,15 @@ public class ExtentManager {
 	{
 		if(extent==null)
 		{
-			 ExtentSparkReporter spark = new ExtentSparkReporter(
-	                    System.getProperty("user.dir") +"/test-output/ExtentReport.html");
+//			 ExtentSparkReporter spark = new ExtentSparkReporter(
+//	                    System.getProperty("user.dir") +"/test-output/ExtentReport.html");
 		
-		extent = new ExtentReports();
+//		extent = new ExtentReports();
+//        extent.attachReporter(spark);
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/ExtentReport.html");
+        spark.config().setOfflineMode(true);   // 🔥 VERY IMPORTANT
+        extent = new ExtentReports();
         extent.attachReporter(spark);
-
         extent.setSystemInfo("Framework", "Singleton POM");
         extent.setSystemInfo("Tester", "Rajkiran");
 	}
