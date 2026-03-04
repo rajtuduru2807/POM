@@ -16,6 +16,7 @@ public class ExtentManager {
 		
 //		extent = new ExtentReports();
 //        extent.attachReporter(spark);
+			
         ExtentSparkReporter spark = new ExtentSparkReporter("test-output/ExtentReport.html");
         spark.config().setOfflineMode(true);   // 🔥 VERY IMPORTANT
         extent = new ExtentReports();
