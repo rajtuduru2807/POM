@@ -21,7 +21,7 @@ public class ExtentManager {
         extent = new ExtentReports();
         extent.attachReporter(spark);
         extent.setSystemInfo("Framework", "Singleton POM");
-        extent.setSystemInfo("Tester", "Rajkiran");
+        extent.setSystemInfo("Tester", "Raj");
 	}
 		return extent;	
 	}
