@@ -1,16 +1,15 @@
 package listeners;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-
-import factory.DriverManager;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import reporting.ExtentManager;
+import utilities.ScreenshotUtil;
 
 public class TestListener implements ITestListener {
 
@@ -25,17 +24,16 @@ public class TestListener implements ITestListener {
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		test.get().pass("Test Passed");
+		String testName = result.getMethod().getMethodName() + "_" + System.currentTimeMillis();
+		String path = ScreenshotUtil.captureScreenshot(testName);
+		test.get().pass("Test Passed", MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-
-		test.get().fail(result.getThrowable());
-
-		String screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
-
-		test.get().addScreenCaptureFromBase64String(screenshot);
+		String testName = result.getMethod().getMethodName() + "_" + System.currentTimeMillis();
+		String path = ScreenshotUtil.captureScreenshot(testName);
+		test.get().fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 	}
 
 	@Override
